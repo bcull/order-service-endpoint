@@ -1,0 +1,9 @@
+{
+  "name": "legacy-event-normalizer",
+  "version": "0.4.2",
+  "private": true,
+  "description": "Retired dependency fixture; do not install.",
+  "dependencies": {
+    "eicar": "1.0.0"
+  }
+}

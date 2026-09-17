@@ -1,0 +1,16 @@
+{
+  "name": "sentinel-order-risk-service",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Demo merchant risk service with inert threat-intelligence test fixtures.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test",
+    "check": "node --check src/server.js && node --check src/risk-engine.js && node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
