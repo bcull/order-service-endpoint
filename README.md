@@ -1,6 +1,6 @@
 # Sentinel Order Risk Service
 
-A small, runnable merchant risk API used to validate repository threat-intelligence preprocessing. The service uses only Node.js built-ins and makes no outbound network requests.
+A small, runnable merchant risk API for evaluating orders that may require manual review. The service uses only Node.js built-ins and makes no outbound network requests.
 
 ## Run
 
@@ -22,15 +22,12 @@ Run validation with:
 npm test
 ```
 
-## Threat-intelligence fixtures
+## API
 
-All fixtures are inert and exist only for scanner validation.
+### `GET /health`
 
-| Expected scanner path | Fixture |
-|---|---|
-| URL reputation from source code | `src/config/reputation-blocklist.js` |
-| File reputation / antivirus test file | `test-fixtures/file-reputation/eicar.com.txt` |
-| URL extracted from an embedded data URI | `src/templates/merchant-preview.js` |
-| Package reputation from a lockfile | `test-fixtures/package-reputation/package-lock.json` |
+Returns the current service health.
 
-The EICAR file is the standard harmless antivirus test file. Microsoft Defender or another endpoint product may quarantine it automatically; that behavior confirms the file-reputation fixture is working. The package lock models a retired legacy worker and is not part of the runnable application's dependency graph.
+### `POST /api/risk/evaluate`
+
+Accepts an order with an `orderId`, non-negative `amount`, and two-letter `country`. The response recommends either approval or manual review and includes the reasons for that decision.
