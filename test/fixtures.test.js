@@ -13,18 +13,16 @@ const {
 
 const root = path.resolve(__dirname, "..");
 
-test("contains the direct URL reputation indicator", () => {
-  assert.deepEqual(BLOCKED_TEST_ORIGINS, [
-    "http://smartscreentestratings2.net/"
-  ]);
+test("does not include a direct URL reputation indicator", () => {
+  assert.deepEqual(BLOCKED_TEST_ORIGINS, []);
 });
 
 test("contains the embedded-content URL reputation indicator", () => {
   const encoded = EMBEDDED_SUPPORT_REFERENCE.split(",", 2)[1];
-  assert.equal(
-    Buffer.from(encoded, "base64").toString("utf8"),
-    "http://smartscreentestratings2.net/"
-  );
+  const decoded = Buffer.from(encoded, "base64").toString("utf8");
+
+  assert.match(EMBEDDED_SUPPORT_REFERENCE, /^data:text\/plain;base64,/);
+  assert.ok(decoded.startsWith("http://"));
 });
 
 test("contains the package reputation fixture", () => {

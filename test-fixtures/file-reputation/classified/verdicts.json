@@ -1,81 +1,18 @@
 {
   "schemaVersion": "1.0",
-  "purpose": "Harmless EICAR-based antivirus verdict validation fixtures.",
-  "warning": "Do not open or execute these Office and PDF files. Endpoint protection may quarantine them.",
+  "purpose": "Harmless EICAR-based source verdict validation fixtures for a compact demo.",
+  "warning": "Do not open or execute these test files. Endpoint protection may quarantine them.",
   "sourceRepository": "https://github.com/fire1ce/eicar-standard-antivirus-test-files",
-  "sourceArtifact": "security-enrichment.v1 (18).json",
   "fixtures": [
     {
-      "file": "eicar-adobe-acrobat-attachment.pdf",
+      "file": "../eicar.com.txt",
       "category": "malware (virus)",
-      "sha256": "851d1e02b134b222d0e4012c2bbb61828f1219c66ec5ed9ca291c406cb83461f",
-      "sourceSize": 6455
-    },
-    {
-      "file": "eicar-adobe-acrobat-javascript-alert.pdf",
-      "category": "malware (trojan)",
-      "sha256": "948ee1d9e0df1dc678f420239fddce99e0268978e65502d0ec31615b0a57b29a",
-      "sourceSize": 13525
-    },
-    {
-      "file": "eicar-excel-dde-cmd-powershell-echo.xlsx",
-      "category": "malware (ransom)",
-      "sha256": "789d5b235a9958c3fa03eb046bd3e6be9fb3273fbc6aa37d98d4794b2b68e81d",
-      "sourceSize": 8684
-    },
-    {
-      "file": "eicar-excel-macro-msgbox.xlsm",
-      "category": "malware (trojan)",
-      "sha256": "488c1c2643973ba8e2464584482da7644347945cebad9bbad85b7ca41f432b6c",
-      "sourceSize": 11450
-    },
-    {
-      "file": "eicar-excel-macro-powershell-echo.xls",
-      "category": "malware (trojan)",
-      "sha256": "772faea5b925aede03956c3e8a08b3fdad0f9db3653415cd3d89d017a2617f46",
-      "sourceSize": 27648
-    },
-    {
-      "file": "eicar-excel-macro-powershell-echo.xlsm",
-      "category": "malware (trojan)",
-      "sha256": "75a444008d2ec38b2de7dc35e5da389c266c5fb689b6f3dc639a869a1c3f0a5b",
-      "sourceSize": 11406
-    },
-    {
-      "file": "eicar-excel-macro-write-file.xls",
-      "category": "malware (trojan)",
-      "sha256": "512d01f64456a25b96770af87d52a499bafb1b28a125a2a489f931b4217f3381",
-      "sourceSize": 31744
-    },
-    {
-      "file": "eicar-powerpoint-action-macro-msgbox.ppt",
-      "category": "malware (trojan)",
-      "sha256": "30090f902cead484616d3a8041f0e18242b22566aeea28160865bfe2227f72f6",
-      "sourceSize": 89088
-    },
-    {
-      "file": "eicar-powerpoint-action-powershell-echo.ppt",
-      "category": "malware",
-      "sha256": "8f7e4483fe87a500114399162317eda0e1b964c17842236b57a139b069458d17",
-      "sourceSize": 109056
-    },
-    {
-      "file": "eicar-word-macro-cmd-echo.doc",
-      "category": "malware (trojandownloader)",
-      "sha256": "03d0985601b7b6e75036b48b9f835bf8b3d664a894f74e80b761627f4cd69749",
-      "sourceSize": 33280
-    },
-    {
-      "file": "eicar-word-macro-powershell-echo.doc",
-      "category": "malware (trojan)",
-      "sha256": "0afec620e5d3b4baab74e4ddc93fa57d5193bcca0dd01679bc132ca804c0c3fd",
-      "sourceSize": 29696
+      "sha256": "8b3f191819931d1f2cef7289239b5f77c00b079847b9c2636e56854d1e5eff71"
     },
     {
       "file": "eicar-word-macro-write-file.docm",
       "category": "malware (trojan)",
-      "sha256": "c710a71893564b2f2869dc37e234f1c3a1e850f6aa38c6a0efa543217e738249",
-      "sourceSize": 16010
+      "sha256": "c710a71893564b2f2869dc37e234f1c3a1e850f6aa38c6a0efa543217e738249"
     }
   ]
 }
