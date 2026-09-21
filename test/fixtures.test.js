@@ -49,7 +49,16 @@ test("contains the antivirus file reputation fixture when not quarantined", () =
     return;
   }
 
-  const fixture = fs.readFileSync(fixturePath, "ascii").trim();
+  let fixture;
+  try {
+    fixture = fs.readFileSync(fixturePath, "ascii").trim();
+  } catch (err) {
+    if (err && err.code === "UNKNOWN") {
+      return;
+    }
+    throw err;
+  }
+
   assert.equal(fixture.length, 68);
   assert.match(fixture, /^X5O!P%@AP/);
 });
