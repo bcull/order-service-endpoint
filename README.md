@@ -2,6 +2,12 @@
 
 A small, runnable merchant risk API for evaluating orders that may require manual review. The service uses only Node.js built-ins and makes no outbound network requests.
 
+The repository also contains inert threat-intelligence fixtures that resemble
+normal service dependencies, including a configured partner payment gateway,
+its server certificate and certificate chain, and a release-signing
+certificate. They are test data only and must not be used for authentication,
+signing, encryption, or production traffic.
+
 ## Run
 
 ```powershell

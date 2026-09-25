@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node src/server.js",
     "test": "node --test",
-    "check": "node --check src/server.js && node --check src/risk-engine.js && node --test"
+    "check": "node --check src/server.js && node --check src/risk-engine.js && node --check src/config/partner-services.js && node --test"
   },
   "engines": {
     "node": ">=18"
