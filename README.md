@@ -8,6 +8,11 @@ its server certificate and certificate chain, and a release-signing
 certificate. They are test data only and must not be used for authentication,
 signing, encryption, or production traffic.
 
+Network and certificate-reputation indicators include:
+
+- partner endpoints `94.154.43.254` and `102.220.160.67`
+- revoked certificate SHA-1 `8dccf6ad21a58226521e36d7e5dbad133331c181`
+
 Package-reputation fixtures cover npm, NuGet, PyPI, Maven, Gradle, and Cargo
 manifests under `test-fixtures/package-reputation`. These manifests are scanner
 inputs only and should not be installed.

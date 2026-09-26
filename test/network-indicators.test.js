@@ -5,14 +5,32 @@ const assert = require("node:assert/strict");
 const { X509Certificate } = require("node:crypto");
 const fs = require("node:fs");
 const {
+  FRAUD_SCORING_SERVICE,
   PAYMENT_GATEWAY,
-  RELEASE_SIGNING_CERTIFICATE_PATH
+  RELEASE_SIGNING_CERTIFICATE_PATH,
+  REVOKED_CERTIFICATES
 } = require("../src/config/partner-services");
 
 test("configures the partner payment gateway by IP address", () => {
   assert.equal(PAYMENT_GATEWAY.host, "94.154.43.254");
   assert.equal(PAYMENT_GATEWAY.port, 443);
   assert.equal(PAYMENT_GATEWAY.serverName, "tls.fixture.test");
+});
+
+test("configures the external fraud scoring service by IP address", () => {
+  assert.deepEqual(FRAUD_SCORING_SERVICE, {
+    host: "102.220.160.67",
+    port: 443
+  });
+});
+
+test("blocks the revoked partner signing certificate by SHA-1", () => {
+  assert.deepEqual(REVOKED_CERTIFICATES, [
+    {
+      sha1: "8dccf6ad21a58226521e36d7e5dbad133331c181",
+      subject: "CN=SAVAS INVESTMENTS PTY LTD, O=SAVAS INVESTMENTS PTY LTD, S=Victoria, C=AU"
+    }
+  ]);
 });
 
 test("loads the payment gateway server certificate", () => {
