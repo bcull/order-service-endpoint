@@ -13,6 +13,22 @@ Network and certificate-reputation indicators include:
 - partner endpoints `94.154.43.254` and `102.220.160.67`
 - revoked certificate SHA-1 `8dccf6ad21a58226521e36d7e5dbad133331c181`
 
+Two additional public CA fixtures exercise certificate-reputation enrichment.
+Each PEM contains only the named CA certificate, with no leaf certificate or
+private key. The service does not load these fixtures or install them in a
+trust store. Provider metadata may change between scans.
+
+| Certificate fixture | Certificate SHA-1 |
+| --- | --- |
+| `config/certificates/positivessl-ca-2.pem` (PositiveSSL CA 2) | `94807b1c788dd2fcbe19c8481ce41cfab8a4c17f` |
+| `config/certificates/rapidssl-sha256-ca.pem` (RapidSSL SHA256 CA) | `c86edbc71ab05078f61acdf3d8dc5db61eb75fb6` |
+
+These are the matching certificate blocks from badssl.com's
+[`wildcard-sha1-2016.pem`](https://github.com/chromium/badssl.com/blob/bfc80f7c2bf0873e2fdc9ba79f38a5afd93570fb/certs/sets/prod/pregen/chain/wildcard-sha1-2016.pem)
+and
+[`subdomain-invalid-expected-sct.pem`](https://github.com/chromium/badssl.com/blob/bfc80f7c2bf0873e2fdc9ba79f38a5afd93570fb/certs/sets/prod/pregen/chain/subdomain-invalid-expected-sct.pem),
+respectively, rather than the complete chains.
+
 Package-reputation fixtures cover npm, NuGet, PyPI, Maven, Gradle, and Cargo
 manifests under `test-fixtures/package-reputation`. These manifests are scanner
 inputs only and should not be installed.
