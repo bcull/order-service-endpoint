@@ -4,6 +4,7 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const { X509Certificate } = require("node:crypto");
 const fs = require("node:fs");
+const path = require("node:path");
 const {
   FRAUD_SCORING_SERVICE,
   PAYMENT_GATEWAY,
@@ -54,3 +55,38 @@ test("keeps the partner certificate chain alongside the gateway config", () => {
 
   assert.ok(chain.length > 0);
 });
+
+for (const fixture of [
+  {
+    file: "positivessl-ca-2.pem",
+    commonName: "PositiveSSL CA 2",
+    sha1: "94807b1c788dd2fcbe19c8481ce41cfab8a4c17f"
+  },
+  {
+    file: "rapidssl-sha256-ca.pem",
+    commonName: "RapidSSL SHA256 CA",
+    sha1: "c86edbc71ab05078f61acdf3d8dc5db61eb75fb6"
+  }
+]) {
+  test(`keeps exactly the public ${fixture.commonName} certificate as a scan fixture`, () => {
+    const pem = fs.readFileSync(
+      path.join(__dirname, "..", "config", "certificates", fixture.file),
+      "utf8"
+    );
+
+    assert.match(
+      pem,
+      /^-----BEGIN CERTIFICATE-----\r?\n[A-Za-z0-9+/=\r\n]+-----END CERTIFICATE-----\s*$/
+    );
+    assert.doesNotMatch(pem, /PRIVATE KEY/);
+
+    const certificate = new X509Certificate(pem);
+
+    assert.ok(certificate.subject.split("\n").includes(`CN=${fixture.commonName}`));
+    assert.equal(certificate.ca, true);
+    assert.equal(
+      certificate.fingerprint.replaceAll(":", "").toLowerCase(),
+      fixture.sha1
+    );
+  });
+}
