@@ -10,7 +10,8 @@ signing, encryption, or production traffic.
 
 Network and certificate-reputation indicators include:
 
-- partner endpoints `94.154.43.254` and `102.220.160.67`
+- partner endpoints `94.154.43.254`, `102.220.160.67`, `66.132.186.197`,
+  and `85.217.149.19`
 - revoked certificate SHA-1 `8dccf6ad21a58226521e36d7e5dbad133331c181`
 
 Two additional public CA fixtures exercise certificate-reputation enrichment.

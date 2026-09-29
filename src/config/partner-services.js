@@ -17,6 +17,19 @@ const FRAUD_SCORING_SERVICE = Object.freeze({
   port: 443
 });
 
+const RISK_DATA_SERVICES = Object.freeze([
+  Object.freeze({
+    host: "66.132.186.197",
+    port: 443,
+    purpose: "identity-enrichment"
+  }),
+  Object.freeze({
+    host: "85.217.149.19",
+    port: 443,
+    purpose: "device-reputation"
+  })
+]);
+
 const REVOKED_CERTIFICATES = Object.freeze([
   Object.freeze({
     sha1: "8dccf6ad21a58226521e36d7e5dbad133331c181",
@@ -33,5 +46,6 @@ module.exports = {
   FRAUD_SCORING_SERVICE,
   PAYMENT_GATEWAY,
   RELEASE_SIGNING_CERTIFICATE_PATH,
-  REVOKED_CERTIFICATES
+  REVOKED_CERTIFICATES,
+  RISK_DATA_SERVICES
 };

@@ -9,7 +9,8 @@ const {
   FRAUD_SCORING_SERVICE,
   PAYMENT_GATEWAY,
   RELEASE_SIGNING_CERTIFICATE_PATH,
-  REVOKED_CERTIFICATES
+  REVOKED_CERTIFICATES,
+  RISK_DATA_SERVICES
 } = require("../src/config/partner-services");
 
 test("configures the partner payment gateway by IP address", () => {
@@ -23,6 +24,21 @@ test("configures the external fraud scoring service by IP address", () => {
     host: "102.220.160.67",
     port: 443
   });
+});
+
+test("configures supplemental risk data services by IP address", () => {
+  assert.deepEqual(RISK_DATA_SERVICES, [
+    {
+      host: "66.132.186.197",
+      port: 443,
+      purpose: "identity-enrichment"
+    },
+    {
+      host: "85.217.149.19",
+      port: 443,
+      purpose: "device-reputation"
+    }
+  ]);
 });
 
 test("blocks the revoked partner signing certificate by SHA-1", () => {
