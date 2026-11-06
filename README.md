@@ -74,3 +74,18 @@ Returns the current service health.
 ### `POST /api/risk/evaluate`
 
 Accepts an order with an `orderId`, non-negative `amount`, and two-letter `country`. The response recommends either approval or manual review and includes the reasons for that decision.
+
+### `POST /api/risk/integration-plan`
+
+Accepts the same order input and previews the configured risk, fulfillment,
+payment, and notification destinations. The response includes the normalized
+order ID, risk decision, and planned HTTPS request methods and URLs.
+Destinations are configured in `src/config/order-integrations.js`; the planner
+does not send requests, resolve hosts, or require provider credentials.
+The existing evaluation response is unchanged.
+
+```powershell
+Invoke-RestMethod -Method Post -Uri http://localhost:3000/api/risk/integration-plan `
+  -ContentType application/json `
+  -Body '{"orderId":"ord-1001","amount":42.5,"country":"US"}'
+```

@@ -2,6 +2,7 @@
 
 const http = require("node:http");
 const { evaluateOrder } = require("./risk-engine");
+const { buildOrderIntegrationPlan } = require("./order-integration-plan");
 
 const port = Number.parseInt(process.env.PORT || "3000", 10);
 
@@ -49,9 +50,19 @@ const server = http.createServer(async (request, response) => {
     return;
   }
 
+  if (request.method === "POST" && request.url === "/api/risk/integration-plan") {
+    try {
+      const order = await readJson(request);
+      sendJson(response, 200, buildOrderIntegrationPlan(order));
+    } catch (error) {
+      sendJson(response, 400, { error: error.message });
+    }
+    return;
+  }
+
   sendJson(response, 404, { error: "Not found" });
 });
 
 server.listen(port, () => {
-  console.log(`Order risk service listening on http://localhost:${port}`);
+  console.log(`Order risk service listening on http://localhost:${server.address().port}`);
 });
