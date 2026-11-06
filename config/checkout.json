@@ -1,0 +1,7 @@
+{
+  "publishableKey": "pk_live_5zlVKl9TQlrlFhZ8ooLC5XBKf2CZAE4h81QAULX3u0QkEkVKj87HEIpJOQomvz2d9ymK5rtFtQH5kqebsHXbGsHpjQvpBa66",
+  "merchantId": "merchant-2026-0017",
+  "credentialLabel": "sk_live_REPLACE_ME",
+  "receiptTemplate": "SG.not-a-key",
+  "publicPayload": "b3JkZXItcmVjZWlwdC10ZW1wbGF0ZS12Mi1wdWJsaWMtY29udGVudA=="
+}

@@ -1,0 +1,7 @@
+{
+  "provider": "sendgrid",
+  "apiKey": "\u0053G.rLsF9K83Lu9HDAFCWXZTDJ.xWcCCWwWBd11cAhvN1ZTMBZPZTEYVurNANLBiSuZHiD",
+  "sender": "receipts@example.invalid",
+  "subject": "Your order is confirmed",
+  "timeoutMs": 3000
+}

@@ -1,0 +1,15 @@
+# Inert synthetic workflow: manual trigger only, and the sole job is always skipped.
+name: Release package
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  publish:
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: "ghp_OYCV5WHCVTKNcjGDMljPjqQJ8xelUlb3InpR"
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+      - run: echo "This scanner sample must remain disabled."

@@ -1,0 +1,6 @@
+{
+  "container": "merchant-audit",
+  "retentionDays": 90,
+  "connectionString": "DefaultEndpointsProtocol=https;BlobEndpoint=https://audit.storage.invalid;AccountName=sentinelaudit;AccountKey=IPnm9PVCk1whTViLPs9flmK1toMgpmKL2Op98iqZHECIbV1N5NTNyzK2FKeaReVMsNHAr9kI+WFI4WTkp9Kb6A==",
+  "uploadConcurrency": 2
+}
