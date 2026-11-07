@@ -89,3 +89,78 @@ Invoke-RestMethod -Method Post -Uri http://localhost:3000/api/risk/integration-p
   -ContentType application/json `
   -Body '{"orderId":"ord-1001","amount":42.5,"country":"US"}'
 ```
+
+## Integration credential examples
+
+The integration files model mistakes in an order service, not recommended
+credential-handling practices. Every credential-shaped value is generated from
+public fixed inputs by `tools/integration-samples.js`; none was obtained from a
+provider or validated against a live account. The request builders are not
+connected to the HTTP server and have no network transport.
+
+| Business context | Scanner challenge |
+| --- | --- |
+| Payment authorization and recovery profile | A committed fallback key copied into two remediation locations |
+| Overnight payment reconciliation | A restricted key next to a public checkout key |
+| Receipt delivery | A Unicode-escaped mail credential in JSON consumed by a request builder |
+| Merchant review notifications | A bot-token fallback in ordinary JavaScript |
+| Invoice and audit exports | An AWS credential pair and an Azure Storage connection string |
+| Release lookup and registry configuration | A constant-joined GitHub token, a copied workflow token, and scoped npm authentication |
+| Kubernetes worker configuration | Base64-encoded integration credentials beside a reference-only workload |
+
+`test/credential-expectations.json` declares **12 expected rule/source
+locations** and **17 named clean controls**, with one-based lines and UTF-16
+columns. It also records the official documentation used to design the
+scenarios. Expectations are derived from template positions before scanning,
+not copied from actual findings. Separate files containing the same value
+remain separate findings. Base64 findings point to the enclosing encoded value.
+
+The controls include environment substitutions, mounted-secret paths,
+publishable keys, an AWS access identifier without its secret on that line,
+short placeholders, public Base64 content, and expressions that look like
+constant concatenation but evaluate differently. Detecting these examples
+does not establish that a credential is usable or that every provider format
+is covered.
+
+```powershell
+node tools/integration-samples.js --check
+npm run check
+```
+
+Use `node tools/integration-samples.js --write` only when intentionally
+regenerating the samples. The local tests verify reproducibility, offline
+request construction, and fixture safety; they do not contain a credential
+scanner. Compare an actual TI Preprocessor scan with the expectation manifest
+to measure misses, unexpected findings, and source-location accuracy.
+
+### Observed detection boundaries
+
+The local V3 credential-enabled TI Preprocessor run found all 12 intended
+source locations and no unexpected credential locations. **10 of 12** also
+matched the expected rule and transformation metadata. These two differences
+remain visible in the expectations rather than being rewritten to pass:
+
+| Example | Expected | Observed |
+| --- | --- | --- |
+| Scoped npm authentication | npm-specific rule `CSCAN-CICD0020` | Generic authentication rule `CSCAN-GENERAL0001`, at the correct token location |
+| Base64 mail credential | `base64` transformation, `enclosing` location | Generic raw carrier match: `none` transformation, `exact` location |
+
+The second case detects the encoded material but does **not** demonstrate
+decoded mail-key recognition in the public report. The encoded reconciliation
+key does report the expected Base64 transformation and enclosing location.
+These are synthetic sample results for the current development scanner, not
+claims about live validity, every credential format, or the default V2 output.
+The strict metadata comparison therefore has two mismatches, not a fully
+passing result.
+
+Verification used fake partner-reputation responses and checked both V3 and V2
+artifacts for generated credential values. Two pre-existing malware fixtures
+were excluded because host antivirus blocked access; two other binary files
+were skipped by credential discovery. No new integration sample was excluded.
+The existing classified-fixture test also fails locally when antivirus removes
+its input; this change does not disable that test or restore quarantined data.
+
+Do not source the `.env` examples, apply the Kubernetes manifests, or use these
+values for authentication. The release workflow is manual-only with an
+unconditional false job guard. Registry authentication lives under
+`deploy/build`, never in the root npm configuration.

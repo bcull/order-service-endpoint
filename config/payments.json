@@ -1,0 +1,11 @@
+{
+  "reconciliation": {
+    "schedule": "0 2 * * *",
+    "pageSize": 100,
+    "apiKey": "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"
+  },
+  "checkout": {
+    "publishableKey": "pk_live_5zlVKl9TQlrlFhZ8ooLC5XBKf2CZAE4h81QAULX3u0QkEkVKj87HEIpJOQomvz2d9ymK5rtFtQH5kqebsHXbGsHpjQvpBa66",
+    "currency": "usd"
+  }
+}

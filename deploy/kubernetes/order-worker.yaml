@@ -1,0 +1,23 @@
+# Reference-only scanner input; not a deployment instruction.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-worker
+  namespace: orders
+spec:
+  replicas: 0
+  selector:
+    matchLabels: { app: order-worker }
+  template:
+    metadata:
+      labels: { app: order-worker }
+    spec:
+      containers:
+        - name: worker
+          image: registry.example.invalid/orders/worker:1.0.0
+          env:
+            - name: SENDGRID_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: order-worker-integrations
+                  key: SENDGRID_API_KEY
